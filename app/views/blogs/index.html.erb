@@ -1,0 +1,30 @@
+<div class="bodyBigSide" style="padding:5px 10px">
+	<h1>Relentless Simplicity - The Bonanzle Blog</h1>
+	<%= print_error_message(flash[:error],false) %>
+	<% if demigod? %>
+		<%= link_to "New blog", new_blog_path %>
+	<% end %>
+
+	<% for blog in @blogs %>
+		<%= render :partial => 'show', :locals => { :blog => blog, :header_style => 'h2', :show_comment_count => true } %>
+	<% end %>
+	<% if @blogs && @blogs.total_pages > 1 -%>
+		<div style="float:left;font-weight:bold;color:green;">See more blogs &nbsp;&nbsp;</div>
+		<div style="float:left"><%= will_paginate(@blogs, {:form_name => :blog_show_params, :param_name => :page} ) -%></div>
+	<% end %>
+		
+</div>
+<div class="bodyLittleSide" style="padding:5px 10px;">
+	<p style="font-size:14px;"><strong>Recent Posts</strong></p>
+	<ul style="list-style-type:disc;margin-left:0;padding-left:5px;">
+	<% for blog in @blogs %>
+		<li style="padding-top:4px;"><%= link_to blog.title, blog_named_link(blog) %></li>
+	<% end %>
+		<% if @blogs && @blogs.total_pages > 1 -%>
+			<li style="padding-top:4px;"><div style="padding-bottom:4px;">More pages</div> <%= will_paginate(@blogs, {:form_name => :blog_show_params, :param_name => :page} ) -%></li>
+			<% end %>
+	</ul>
+	<p style="font-size:14px;"><strong>Or Maybe</strong></p>
+	<a href="http://technorati.com/faves?sub=addfavbtn&amp;add=http://www.bonanzle.com/blogs"><img src="http://static.technorati.com/pix/fave/btn-fave2.png" alt="Add to Technorati Favorites" /></a><br />
+	<div style="margin-top:4px"><%= link_to "#{image_tag "feed-icon.png"} Subscribe to feed", { :action => :feed }, :style => 'text-decoration:none' %></div>
+</div>
