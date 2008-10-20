@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
-  before_filter :get_page_name
+  #before_filter :get_page_name
 	before_filter :verify_bloggable, :except => [:index, :show, :feed]
 
 	# GET /blogs
@@ -7,7 +7,7 @@ class BlogsController < ApplicationController
   def index
 		blog_show_params = params[:blog_show_params] || {}
     @blogs = Blog.paginate(:all, :conditions => { :is_indexed => true, :is_complete => true }, :order => "created_at DESC", :page => blog_show_params[:page] || 1, :per_page => 15)
-		set_page_title("Relentless Simplicity - The Bonanzle Blog")
+		#set_page_title("Relentless Simplicity - The Bonanzle Blog")
     
 		respond_to do |format|
       format.html # index.html.erb
@@ -31,7 +31,7 @@ class BlogsController < ApplicationController
 			flash[:error] = "You do not have permission to see this blog."
 			return (redirect_to( :action => 'index' ))
 		else
-			set_page_title(@blog.title)
+			#set_page_title(@blog.title)
 		end
 	
     respond_to do |format|

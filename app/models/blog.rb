@@ -21,7 +21,6 @@ class Blog < ActiveRecord::Base
   has_many :comments, :class_name => 'BlogComment', :foreign_key => :record_id
 	has_many :assets, :class_name => 'BlogAsset'
 	
-	xss_terminate :except => [ :body ]
 	before_save :update_url_identifier
 	
 	def update_url_identifier
