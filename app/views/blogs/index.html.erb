@@ -1,6 +1,6 @@
 <div id="bloggityContainer">
 	<div class="bodyBigSide">
-		<h1>My Bloggity Blog Blog</h1>
+		<h1>My Bloggity Blog</h1>
 		<%= flash[:error] %>
 		<% if blog_writer? %>
 			<%= link_to "New blog", new_blog_path %>
@@ -17,16 +17,6 @@
 			
 	</div>
 	<div class="bodyLittleSide">
-		<p style="font-size:14px;"><strong>Recent Posts</strong></p>
-		<ul id="postList">
-		<% for blog in @blogs %>
-			<li><%= link_to blog.title, blog_named_link(blog) %></li>
-		<% end %>
-			<% if @blogs && @blogs.total_pages > 1 -%>
-				<li><div style="padding-bottom:4px;">More pages</div> <%= will_paginate(@blogs, {:form_name => :blog_show_params, :param_name => :page} ) -%></li>
-				<% end %>
-		</ul>
-		<p style="font-size:14px;"><strong>Or Maybe</strong></p>
-		<div style="margin-top:4px"><%= link_to "#{image_tag "feed-icon.png"} Subscribe to feed", { :action => :feed }, :style => 'text-decoration:none' %></div>
+		<%= render :partial => 'blogs/recent' %>
 	</div>
 </div>

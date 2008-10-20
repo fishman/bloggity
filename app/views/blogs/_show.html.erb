@@ -13,12 +13,12 @@
 	<span style="color:gray;font-size:10px"><%= blog.created_at.strftime("%B %d, %Y") %></span>
 	<p><%= simple_format(auto_link(blog.body)) %></p>
 	<% if show_comment_count %>
-		<p style="text-align:center;width:100%;color:gray;">Posted by <%= print_link_to_profile(blog.posted_by, blog.posted_by.first_name) -%> | <%= link_to pluralize(blog.comments.size, "comment"), [blog] %> </p>
+		<p style="text-align:center;width:100%;color:gray;">Posted by <%= link_to(blog.posted_by.display_name, blog.posted_by) -%> | <%= link_to pluralize(blog.comments.size, "comment"), [blog] %> </p>
 	<% else %>
-		<div class="postSummary">Posted by <%= print_link_to_profile(blog.posted_by, blog.posted_by.first_name) %> <br />
+		<div class="postSummary">Posted by <%= link_to(blog.posted_by.display_name, blog.posted_by) -%> <br />
 		Tagged as: <%= blog.tags %></div>
 	<% end %>
-	<% if demigod? %>
+	<% if blog_writer? %>
 		<p><%= link_to 'Edit', edit_blog_path(blog) %> or <%= link_to 'Destroy', blog, :confirm => 'Are you sure?', :method => :delete %></p>
 	<% end %>
 <br/>

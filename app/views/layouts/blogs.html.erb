@@ -4,8 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title><%= get_page_name %></title>
-  <%= stylesheet_link_tag('blog') %>  		
+  <title><%= @page_name || "My Bloggity Blog" %></title>
+  <%= stylesheet_link_tag 'blog', :plugin => 'bloggity' %>  		
 	
 </head>
 <body>

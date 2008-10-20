@@ -1,11 +1,13 @@
 #bloggityContainer .bodyBigSide {
 	padding:5px 10px;
 	width:750px;
+	float:left;
 }
 
 #bloggityContainer .bodyLittleSide {
 	padding:5px 10px;
 	width:200px;
+	float:left;
 }
 
 #bloggityContainer div.blogShowContainer div.postSummary {

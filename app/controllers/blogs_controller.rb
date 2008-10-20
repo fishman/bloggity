@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
-  #before_filter :get_page_name
+  before_filter :get_page_name
 	before_filter :verify_bloggable, :except => [:index, :show, :feed]
 
 	# GET /blogs
@@ -27,11 +27,11 @@ class BlogsController < ApplicationController
     @blogs = Blog.find(:all, :conditions => { :is_indexed => true, :is_complete => true }, :order => "created_at DESC")
     @blog = Blog.find(:first, :conditions => ["id = ? OR url_identifier = ?", params[:id], params[:id]])
 
-		if !@blog || (!@blog.is_complete && !current_user.demigod?)
+		if !@blog || (!@blog.is_complete && !blog_writer?)
 			flash[:error] = "You do not have permission to see this blog."
 			return (redirect_to( :action => 'index' ))
 		else
-			#set_page_title(@blog.title)
+			set_page_title(@blog.title)
 		end
 	
     respond_to do |format|
@@ -103,9 +103,9 @@ class BlogsController < ApplicationController
     end
   end
 	
-	# Ensure this user is a demigod, i.e., a legimate editor of blogs
+	# Ensure this user is a legimate editor of blogs, or redirect them
 	def verify_bloggable
-		unless current_user && current_user.extended_user_info && current_user.extended_user_info.bloggable
+		unless blog_writer?
 			flash[:error] = "You do not have permission to see this blog"
 			return (redirect_to( :action => 'index' ))
 		end

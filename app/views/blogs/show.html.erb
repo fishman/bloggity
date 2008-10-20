@@ -1,13 +1,10 @@
-<div class="bodyBigSide" style="padding:5px 10px">
-	<%= render :partial => 'show', :locals => { :blog => @blog } %>
-	<%= render :partial => 'comments', :locals => { :blog => @blog } %>
+<div id="bloggityContainer">
+	<div class="bodyBigSide">
+		<%= render :partial => 'show', :locals => { :blog => @blog } %>
+		<%= render :partial => 'comments', :locals => { :blog => @blog } %>
+	</div>
+	
+	<div class="bodyLittleSide">
+		<%= render :partial => 'blogs/recent' %>
+	</div>	
 </div>
-
-<div class="bodyLittleSide" style="padding:5px 10px;">
-	<p style="font-size:14px;"><strong><%= link_to "All Recent Posts", { :controller => 'blogs' } -%></strong></p>
-	<ul style="list-style-type:disc;margin-left:0;padding-left:5px;">
-	<% for blog in @blogs %>
-		<li style="padding-top:4px;"><%= link_to blog.title, blog %></li>
-	<% end %>
-	<ul>
-</div>	

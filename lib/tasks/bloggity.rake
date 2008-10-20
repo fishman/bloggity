@@ -20,9 +20,10 @@ class CreateNextUpVotes < ActiveRecord::Migration
 	    t.integer "height"
 	  end
 	
-	  create_table :blog_comments, :force => true do |t|
+	  create_table :comments, :force => true do |t|
+      t.string   "type"
+	    t.integer  "record_id"
 	    t.integer  "user_id"
-	    t.integer  "blog_id"
 	    t.text     "comment"
 	    t.boolean  "approved"
 	    t.datetime "created_at"
